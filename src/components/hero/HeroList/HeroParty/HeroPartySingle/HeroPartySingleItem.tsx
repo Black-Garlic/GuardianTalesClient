@@ -12,7 +12,7 @@ const HeroPartySingleItem = ({ hero }: HeroPartySingleItemProps) => {
       <div className={"flex flex-col flex-1 rounded-lg bg-sub-6"}>
         <img
           className={"object-cover w-full h-full"}
-          src={`/image/Character/${hero.englishName}.png`}
+          src={`/image/Character/List/${hero.englishName}.png`}
         />
       </div>
 

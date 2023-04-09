@@ -1,4 +1,6 @@
 const HeroDetailImage = () => {
+  const character = "Valencia";
+
   return (
     <div
       className={
@@ -8,13 +10,13 @@ const HeroDetailImage = () => {
       <div className={"w-full h-full rounded-lg bg-sub-6"}>
         <img
           className={"object-cover w-full h-full rounded-lg"}
-          src={"/image/Background/Beth.png"}
+          src={`/image/Background/${character}.png`}
         />
       </div>
 
       <img
         className={"absolute object-cover w-full h-full top-0 rounded-lg"}
-        src={"/image/Character/Beth.png"}
+        src={`/image/Character/Detail/${character}.png`}
       />
     </div>
   );
