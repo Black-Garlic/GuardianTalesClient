@@ -2,7 +2,7 @@ const HeroSearchListItem = () => {
   return (
     <div className={"flex flex-row my-2 p-2 rounded-lg bg-main"}>
       <div className={"w-16 h-16 mr-2"}>
-        <img src={"/image/Sprites/Beth.png"} />
+        <img src={`/image/Sprites/Beth.png`} />
       </div>
 
       <div className={"flex flex-col flex-1"}>

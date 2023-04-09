@@ -5,7 +5,7 @@ const HeroPartySingle = () => {
   const heroParty = [
     {
       name: "베스",
-      englishName: "Beth",
+      englishName: "White Beast",
       element: "암",
       role: "전사",
       chainStartType: "다운",
@@ -13,7 +13,7 @@ const HeroPartySingle = () => {
     },
     {
       name: "칸나",
-      englishName: "Kanna",
+      englishName: "Future Knight",
       element: "무",
       role: "지원가",
       chainStartType: "다운",
@@ -21,15 +21,15 @@ const HeroPartySingle = () => {
     },
     {
       name: "엘비라",
-      englishName: "Elvira",
+      englishName: "Future Princess",
       element: "화",
       role: "원거리 딜러",
       chainStartType: "다운",
       chainEndType: "부상",
     },
     {
-      name: "",
-      englishName: "Carol",
+      name: "아오바",
+      englishName: "Oghma",
       element: "광",
       role: "전사",
       chainStartType: "다운",

@@ -1,5 +1,5 @@
 const HeroDetailImage = () => {
-  const character = "Valencia";
+  const character = "White Beast";
 
   return (
     <div
