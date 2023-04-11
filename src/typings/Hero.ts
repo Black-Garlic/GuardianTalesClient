@@ -11,8 +11,8 @@ export interface Hero {
   partyBuff: string;
   firstNormalAttackName: string;
   firstNormalAttackDescription: string;
-  secondNormalAttackName: string;
-  secondNormalAttackDescription: string;
+  secondNormalAttackName?: string;
+  secondNormalAttackDescription?: string;
   chainSkillName: string;
   chainSkillStartType: string;
   chainSkillEndType: string;
@@ -32,5 +32,5 @@ export interface Weapon {
   chainType: string;
   skillDamage: number;
   skillRegenTime: number;
-  skillAdditionalEffect: string;
+  skillAdditionalEffect?: string;
 }

@@ -4,9 +4,14 @@ import HeroPartySingle from "@components/Hero/HeroList/HeroParty/HeroPartySingle
 import HeroPartyTriple from "@components/Hero/HeroList/HeroParty/HeroPartyTriple/HeroPartyTriple";
 import HeroSearchList from "@components/Hero/HeroList/HeroSearchList/HeroSearchList";
 import HeroPartyConfig from "@components/Hero/HeroList/HeroParty/HeroPartyConfig";
+import { useGetHeroesListQuery } from "@services/hero/HeroApi";
 
 const HeroListPage = () => {
   const [partyConfig, setPartyConfig] = useState<string>("SINGLE");
+
+  const { data: heroes } = useGetHeroesListQuery("", {
+    refetchOnMountOrArgChange: 2,
+  });
 
   return (
     <MainTemplate>
@@ -21,7 +26,7 @@ const HeroListPage = () => {
         </div>
 
         <div className={"flex-1"}>
-          <HeroSearchList />
+          <HeroSearchList heroList={heroes || []} />
         </div>
       </div>
     </MainTemplate>
