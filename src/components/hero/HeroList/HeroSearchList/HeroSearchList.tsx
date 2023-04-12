@@ -1,13 +1,13 @@
 import HeroSearchListFilter from "@components/Hero/HeroList/HeroSearchList/HeroSearchListFilter";
 import HeroSearchListItem from "@components/Hero/HeroList/HeroSearchList/HeroSearchListItem";
+import { Hero } from "@typings/Hero";
 
-const HeroSearchList = () => {
-  const heroList = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+interface HeroSearchListProps {
+  heroList: Hero[];
+}
+
+const HeroSearchList = ({ heroList }: HeroSearchListProps) => {
   const filterList = [
-    {
-      title: "속성",
-      value: ["무", "광", "암", "화", "수", "지"],
-    },
     {
       title: "속성",
       value: ["무", "광", "암", "화", "수", "지"],
@@ -41,7 +41,7 @@ const HeroSearchList = () => {
         </div>
       </div>
 
-      <div className={"flex-1 p-4 rounded-lg bg-sub-3"}>
+      <div className={"flex-1 p-4 rounded-lg bg-sub-3 "}>
         <div className={"p-2 rounded-lg text-sub-1"}>
           <div className={"flex flex-col flex-1 p-2"}>
             <div className={"flex flex-col flex-1 ml-2 pl-16"}>
@@ -56,9 +56,11 @@ const HeroSearchList = () => {
             </div>
           </div>
 
-          {heroList.map(() => (
-            <HeroSearchListItem />
-          ))}
+          <div className={"max-h-[900px] overflow-y-scroll scrollbar-hide"}>
+            {heroList.map((hero) => (
+              <HeroSearchListItem hero={hero} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

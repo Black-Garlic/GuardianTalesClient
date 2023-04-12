@@ -1,4 +1,10 @@
-const HeroDetailInfo = () => {
+import { Hero } from "@typings/Hero";
+
+interface HeroDetailInfoProps {
+  hero?: Hero;
+}
+
+const HeroDetailInfo = ({ hero }: HeroDetailInfoProps) => {
   return (
     <div
       className={
@@ -13,32 +19,30 @@ const HeroDetailInfo = () => {
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>이름</div>
-            <div className={"flex-1"}>베스</div>
+            <div className={"flex-1"}>{hero?.name}</div>
           </div>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>등급</div>
-            <div className={"flex-1"}>베스</div>
+            <div className={"flex-1"}>{hero?.stage}</div>
           </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>역할</div>
-            <div className={"flex-1"}>베스</div>
+            <div className={"flex-1"}>{hero?.role}</div>
           </div>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>속성</div>
-            <div className={"flex-1"}>베스</div>
+            <div className={"flex-1"}>{hero?.element}</div>
           </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>파티 버프</div>
-            <div className={"flex-1"}>베스</div>
+            <div className={"flex-1"}>{hero?.partyBuff} 증가</div>
           </div>
-
-          <div className={"flex-1 flex-1 m-2 p-2"} />
         </div>
       </div>
 
@@ -53,65 +57,64 @@ const HeroDetailInfo = () => {
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>무기 이름</div>
-            <div className={"flex-1"}>프레데터</div>
+            <div className={"flex-1"}>{hero?.weaponInfo?.name}</div>
           </div>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>차수</div>
-            <div className={"flex-1"}>1차</div>
+            <div className={"flex-1"}>{hero?.weaponPhase}</div>
+          </div>
+        </div>
+
+        <div className={"flex flex-row"}>
+          <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
+            <div className={"w-48"}>무기 타입</div>
+            <div className={"flex-1"}>{hero?.weaponType}</div>
+          </div>
+          <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
+            <div className={"w-48"}>속성</div>
+            <div className={"flex-1"}>{hero?.weaponInfo.element}</div>
           </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>전용 무기 효과</div>
-            <div className={"flex-1"}>
-              다크 스매시 적중 시 암속성 저항을 3초 동안 20% 감소시키고, 준
-              피해의 10% 만큼 보호막을 생성합니다.
-            </div>
+            <div className={"flex-1"}>{hero?.weaponInfo.weaponOption}</div>
           </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>무기 스킬</div>
-            <div className={"flex-1"}>프레데터 스트라이크</div>
+            <div className={"flex-1"}>{hero?.weaponInfo.skillName}</div>
           </div>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>연계기 타입</div>
-            <div className={"flex-1"}>다운</div>
+            <div className={"flex-1"}>{hero?.weaponInfo.chainType}</div>
           </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>스킬 피해량</div>
-            <div className={"flex-1"}>235%</div>
+            <div className={"flex-1"}>{hero?.weaponInfo.skillDamage}%</div>
           </div>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>스킬 충전 시간</div>
-            <div className={"flex-1"}>8초</div>
+            <div className={"flex-1"}>{hero?.weaponInfo.skillRegenTime}초</div>
           </div>
         </div>
 
-        <div className={"flex flex-row"}>
-          <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
-            <div className={"w-48"}>전용무기 효과</div>
-            <div className={"flex-1"}>베스</div>
-          </div>
-          <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
-            <div className={"w-48"}>속성</div>
-            <div className={"flex-1"}>베스</div>
-          </div>
-        </div>
-
-        <div className={"flex flex-row"}>
-          <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
-            <div className={"w-48"}>무기 스킬 추가 효과</div>
-            <div className={"flex-1"}>
-              범위 안의 아군은 체력이 회복되고, 부정적인 효과가 해제됩니다.
+        {hero?.weaponInfo?.skillAdditionalEffect && (
+          <div className={"flex flex-row"}>
+            <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
+              <div className={"w-48"}>무기 스킬 추가 효과</div>
+              <div className={"flex-1"}>
+                {hero?.weaponInfo.skillAdditionalEffect}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className={"flex flex-col mb-8"}>
@@ -121,74 +124,73 @@ const HeroDetailInfo = () => {
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
-            <div className={"w-48"}>다크 스매시</div>
-            <div className={"flex-1"}>
-              마나가 깃든 양손검을 휘둘러 적들에게 근접 피해를 줍니다. 원거리
-              딜러나 가장 멀리 있는 몬스터를 우선 공격합니다.
-            </div>
+            <div className={"w-48"}>{hero?.firstNormalAttackName}</div>
+            <div className={"flex-1"}>{hero?.firstNormalAttackDescription}</div>
           </div>
         </div>
 
-        <div className={"flex flex-row"}>
-          <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
-            <div className={"w-48"}>다크 스매시</div>
-            <div className={"flex-1"}>
-              마나가 깃든 양손검을 휘둘러 적들에게 근접 피해를 줍니다. 원거리
-              딜러나 가장 멀리 있는 몬스터를 우선 공격합니다.
+        {hero?.secondNormalAttackName && (
+          <div className={"flex flex-row"}>
+            <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
+              <div className={"w-48"}>{hero?.secondNormalAttackName}</div>
+              <div className={"flex-1"}>
+                {hero?.secondNormalAttackDescription}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className={"flex flex-col mb-8"}>
         <div className={"flex flex-row"}>
-          <div className={"flex-1 title-3"}>연계기 - 다크 인베이전</div>
+          <div className={"flex-1 title-3"}>
+            연계기 - {hero?.chainSkillName}
+          </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>연계기 시작</div>
-            <div className={"flex-1"}>다운</div>
+            <div className={"flex-1"}>{hero?.chainSkillStartType}</div>
           </div>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>연계기 종료</div>
-            <div className={"flex-1"}>부상</div>
+            <div className={"flex-1"}>{hero?.chainSkillEndType}</div>
           </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>연계기 피해량</div>
-            <div className={"flex-1"}>400%</div>
+            <div className={"flex-1"}>{hero?.chainSkillDamage}%</div>
           </div>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>연계기 피해 타입</div>
-            <div className={"flex-1"}>원거리</div>
+            <div className={"flex-1"}>
+              {hero?.chainSkillDamageType || "ALL"}
+            </div>
           </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>연계기 추가 효과</div>
-            <div className={"flex-1"}>
-              자신의 근접 피해량을 8초 동안 40% 증가시킵니다.
-            </div>
+            <div className={"flex-1"}>{hero?.chainSkillAdditionalEffect}</div>
           </div>
         </div>
       </div>
 
       <div className={"flex flex-col"}>
         <div className={"flex flex-row"}>
-          <div className={"flex-1 title-3"}>특수 능력 - 전투 본능</div>
+          <div className={"flex-1 title-3"}>
+            특수 능력 - {hero?.specialAbilityName}
+          </div>
         </div>
 
         <div className={"flex flex-row"}>
           <div className={"flex flex-1 m-2 p-2 rounded-lg bg-main"}>
             <div className={"w-48"}>특수 능력 효과</div>
-            <div className={"flex-1"}>
-              3칸 이내에 있는 적의 숫자에 따라 피해량이 20% 에서 최대 60% 까지
-              증가하고, 받는 피해량이 20% 에서 최대 60% 까지 감소합니다.
-            </div>
+            <div className={"flex-1"}>{hero?.specialAbilityDescription}</div>
           </div>
         </div>
       </div>
