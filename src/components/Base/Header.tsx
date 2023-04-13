@@ -12,6 +12,7 @@ const Header = () => {
       <div className={"flex flex-row flex-1 items-center"}>
         {menuList.map((menu, index) => (
           <button
+            key={menu + "-" + index}
             className={classNames(
               "h-7 mx-2 sub-title-2",
               selectedMenu === index

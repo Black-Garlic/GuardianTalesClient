@@ -9,7 +9,7 @@ const HeroPartySingleItem = ({ hero }: HeroPartySingleItemProps) => {
         "flex flex-col flex-1 relative m-1 rounded-lg border-4 border-sub-1"
       }
     >
-      <div className={"flex flex-col flex-1 rounded-lg bg-sub-6"}>
+      <div className={"flex flex-col flex-1 bg-sub-1"}>
         <img
           className={"object-cover w-full h-full"}
           src={`/image/Character/List/${hero.englishName}.png`}
@@ -18,7 +18,7 @@ const HeroPartySingleItem = ({ hero }: HeroPartySingleItemProps) => {
 
       <div
         className={
-          "flex flex-col absolute w-full p-4 bottom-[0%] rounded-b-lg sub-title-3 text-sub-1 text-center bg-main"
+          "flex flex-col absolute w-full p-4 bottom-[0%] rounded-lg sub-title-3 text-sub-1 text-center bg-main"
         }
       >
         <div className={"flex-1 h-24 mb-2 p-1 pt-2 sub-title-2"}>

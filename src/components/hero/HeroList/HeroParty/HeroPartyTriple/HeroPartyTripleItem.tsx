@@ -11,7 +11,7 @@ const HeroPartyTripleItem = ({ hero }: HeroPartyTripleItemProps) => {
     >
       <div
         className={
-          "flex flex-col w-full p-4 rounded-b-lg sub-title-3 text-sub-1 text-center bg-main"
+          "flex flex-col w-full p-4 rounded-lg sub-title-3 text-sub-1 text-center bg-main"
         }
       >
         <div className={"flex-1 h-24 mb-2 p-1 pt-2 sub-title-2"}>

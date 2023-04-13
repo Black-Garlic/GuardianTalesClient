@@ -8,15 +8,16 @@ import { useGetHeroesListQuery } from "@services/hero/HeroApi";
 
 const HeroListPage = () => {
   const [partyConfig, setPartyConfig] = useState<string>("SINGLE");
+  const [searchText, setSearchText] = useState<string>("");
 
-  const { data: heroes } = useGetHeroesListQuery("", {
+  const { data: heroes } = useGetHeroesListQuery(searchText, {
     refetchOnMountOrArgChange: 2,
   });
 
   return (
     <MainTemplate>
       <div className={"flex flex-row flex-1"}>
-        <div className={"flex flex-col flex-1"}>
+        <div className={"flex flex-col flex-1 h-[1000px]"}>
           <HeroPartyConfig
             partyConfig={partyConfig}
             setPartyConfig={setPartyConfig}
@@ -25,8 +26,11 @@ const HeroListPage = () => {
           {partyConfig === "SINGLE" ? <HeroPartySingle /> : <HeroPartyTriple />}
         </div>
 
-        <div className={"flex-1"}>
-          <HeroSearchList heroList={heroes || []} />
+        <div className={"flex-1 h-[1000px] overflow-y-scroll scrollbar-hide"}>
+          <HeroSearchList
+            setSearchText={setSearchText}
+            heroList={heroes || []}
+          />
         </div>
       </div>
     </MainTemplate>

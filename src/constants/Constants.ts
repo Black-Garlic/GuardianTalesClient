@@ -25,7 +25,7 @@ export enum ROLE {
   SUPPORT = "지원가",
 }
 
-export enum CHAI_TYPE {
+export enum CHAIN_TYPE {
   ALL = "ALL",
   DOWNED = "다운",
   INJURED = "부상",
