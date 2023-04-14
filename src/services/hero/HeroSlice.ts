@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Hero } from "@typings/Hero";
+import { FilterOption } from "@typings/Option";
+import { FILTER_OPTION } from "@constants/Constants";
 
 interface HeroState {
   singleParty: Hero[];
@@ -8,6 +10,7 @@ interface HeroState {
     second: Hero[];
     third: Hero[];
   };
+  filterOption: FilterOption;
 }
 
 // Define the initial state using that type
@@ -18,6 +21,7 @@ const initialState: HeroState = {
     second: [],
     third: [],
   },
+  filterOption: FILTER_OPTION,
 };
 
 export const heroSlice = createSlice({
@@ -51,6 +55,12 @@ export const heroSlice = createSlice({
     resetTripleParty: (state) => {
       state.tripleParty = initialState.tripleParty;
     },
+    setFilterOption: (state, action: PayloadAction<FilterOption>) => {
+      state.filterOption = action.payload;
+    },
+    resetFilterOption: (state) => {
+      state.filterOption = initialState.filterOption;
+    },
   },
 });
 
@@ -64,6 +74,8 @@ export const {
   setTripleThirdParty,
   resetTripleThirdParty,
   resetTripleParty,
+  setFilterOption,
+  resetFilterOption,
 } = heroSlice.actions;
 
 export default heroSlice;

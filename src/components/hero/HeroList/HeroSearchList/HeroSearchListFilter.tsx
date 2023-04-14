@@ -1,163 +1,187 @@
 import classNames from "classnames";
-import { FilterOption, Option } from "@typings/Option";
-import { Dispatch, SetStateAction, useCallback } from "react";
+import { Option } from "@typings/Option";
+import { useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "@store/store";
+import { setFilterOption } from "@services/hero/HeroSlice";
 
-interface HeroSearchListFilterProps {
-  heroListFilter: FilterOption;
-  setHeroListFilter: Dispatch<SetStateAction<FilterOption>>;
-}
+const HeroSearchListFilter = () => {
+  const dispatch = useAppDispatch();
 
-const HeroSearchListFilter = ({
-  heroListFilter,
-  setHeroListFilter,
-}: HeroSearchListFilterProps) => {
+  const filterOptionSelector = useAppSelector(
+    (state) => state.hero.filterOption
+  );
+
   const toggleStageFilter = useCallback(
     (selectedStageOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        stage: prev.stage.map((stageOption) => {
-          if (stageOption.label === selectedStageOption.label) {
-            return { ...stageOption, select: !stageOption.select };
-          } else {
-            return stageOption;
-          }
-        }),
-      }));
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          stage: filterOptionSelector.stage.map((stageOption) => {
+            if (stageOption.label === selectedStageOption.label) {
+              return { ...stageOption, select: !stageOption.select };
+            } else {
+              return stageOption;
+            }
+          }),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   const toggleRoleFilter = useCallback(
     (selectedRoleOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        role: prev.role.map((roleOption) => {
-          if (roleOption.label === selectedRoleOption.label) {
-            return { ...roleOption, select: !roleOption.select };
-          } else {
-            return roleOption;
-          }
-        }),
-      }));
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          role: filterOptionSelector.role.map((roleOption) => {
+            if (roleOption.label === selectedRoleOption.label) {
+              return { ...roleOption, select: !roleOption.select };
+            } else {
+              return roleOption;
+            }
+          }),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   const toggleElementFilter = useCallback(
     (selectedElementOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        element: prev.element.map((elementOption) => {
-          if (elementOption.label === selectedElementOption.label) {
-            return { ...elementOption, select: !elementOption.select };
-          } else {
-            return elementOption;
-          }
-        }),
-      }));
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          element: filterOptionSelector.element.map((elementOption) => {
+            if (elementOption.label === selectedElementOption.label) {
+              return { ...elementOption, select: !elementOption.select };
+            } else {
+              return elementOption;
+            }
+          }),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   const toggleWeaponTypeFilter = useCallback(
     (selectedWeaponTypeOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        weaponType: prev.weaponType.map((weaponTypeOption) => {
-          if (weaponTypeOption.label === selectedWeaponTypeOption.label) {
-            return { ...weaponTypeOption, select: !weaponTypeOption.select };
-          } else {
-            return weaponTypeOption;
-          }
-        }),
-      }));
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          weaponType: filterOptionSelector.weaponType.map(
+            (weaponTypeOption) => {
+              if (weaponTypeOption.label === selectedWeaponTypeOption.label) {
+                return {
+                  ...weaponTypeOption,
+                  select: !weaponTypeOption.select,
+                };
+              } else {
+                return weaponTypeOption;
+              }
+            }
+          ),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   const toggleWeaponSkillTypeFilter = useCallback(
     (selectedWeaponSkillTypeOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        weaponSkillType: prev.weaponSkillType.map((weaponSkillTypeOption) => {
-          if (
-            weaponSkillTypeOption.label === selectedWeaponSkillTypeOption.label
-          ) {
-            return {
-              ...weaponSkillTypeOption,
-              select: !weaponSkillTypeOption.select,
-            };
-          } else {
-            return weaponSkillTypeOption;
-          }
-        }),
-      }));
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          weaponSkillType: filterOptionSelector.weaponSkillType.map(
+            (weaponSkillTypeOption) => {
+              if (
+                weaponSkillTypeOption.label ===
+                selectedWeaponSkillTypeOption.label
+              ) {
+                return {
+                  ...weaponSkillTypeOption,
+                  select: !weaponSkillTypeOption.select,
+                };
+              } else {
+                return weaponSkillTypeOption;
+              }
+            }
+          ),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   const togglePartyBuffFilter = useCallback(
     (selectedPartyBuffOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        partyBuff: prev.partyBuff.map((partyBuffOption) => {
-          if (partyBuffOption.label === selectedPartyBuffOption.label) {
-            return { ...partyBuffOption, select: !partyBuffOption.select };
-          } else {
-            return partyBuffOption;
-          }
-        }),
-      }));
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          partyBuff: filterOptionSelector.partyBuff.map((partyBuffOption) => {
+            if (partyBuffOption.label === selectedPartyBuffOption.label) {
+              return { ...partyBuffOption, select: !partyBuffOption.select };
+            } else {
+              return partyBuffOption;
+            }
+          }),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   const toggleChainSkillStartTypeFilter = useCallback(
     (selectedChainSkillStartTypeOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        chainSkillStartType: prev.chainSkillStartType.map(
-          (chainSkillStartTypeOption) => {
-            if (
-              chainSkillStartTypeOption.label ===
-              selectedChainSkillStartTypeOption.label
-            ) {
-              return {
-                ...chainSkillStartTypeOption,
-                select: !chainSkillStartTypeOption.select,
-              };
-            } else {
-              return chainSkillStartTypeOption;
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          chainSkillStartType: filterOptionSelector.chainSkillStartType.map(
+            (chainSkillStartTypeOption) => {
+              if (
+                chainSkillStartTypeOption.label ===
+                selectedChainSkillStartTypeOption.label
+              ) {
+                return {
+                  ...chainSkillStartTypeOption,
+                  select: !chainSkillStartTypeOption.select,
+                };
+              } else {
+                return chainSkillStartTypeOption;
+              }
             }
-          }
-        ),
-      }));
+          ),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   const toggleChainSkillEndTypeFilter = useCallback(
     (selectedChainSkillEndTypeOption: Option) => {
-      setHeroListFilter((prev) => ({
-        ...prev,
-        chainSkillEndType: prev.chainSkillEndType.map(
-          (chainSkillEndTypeOption) => {
-            if (
-              chainSkillEndTypeOption.label ===
-              selectedChainSkillEndTypeOption.label
-            ) {
-              return {
-                ...chainSkillEndTypeOption,
-                select: !chainSkillEndTypeOption.select,
-              };
-            } else {
-              return chainSkillEndTypeOption;
+      dispatch(
+        setFilterOption({
+          ...filterOptionSelector,
+          chainSkillEndType: filterOptionSelector.chainSkillEndType.map(
+            (chainSkillEndTypeOption) => {
+              if (
+                chainSkillEndTypeOption.label ===
+                selectedChainSkillEndTypeOption.label
+              ) {
+                return {
+                  ...chainSkillEndTypeOption,
+                  select: !chainSkillEndTypeOption.select,
+                };
+              } else {
+                return chainSkillEndTypeOption;
+              }
             }
-          }
-        ),
-      }));
+          ),
+        })
+      );
     },
-    [setHeroListFilter]
+    [dispatch, filterOptionSelector]
   );
 
   return (
@@ -166,7 +190,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>등급</div>
 
         <div className={"flex-1 grid grid-cols-4"}>
-          {heroListFilter.stage.map((stageOption, index) => (
+          {filterOptionSelector.stage.map((stageOption, index) => (
             <div key={stageOption.value + index} className={"text-center"}>
               <button
                 className={classNames(stageOption.select && "text-sub-2")}
@@ -183,7 +207,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>역할</div>
 
         <div className={"flex-1 grid grid-cols-4"}>
-          {heroListFilter.role.map((roleOption, index) => (
+          {filterOptionSelector.role.map((roleOption, index) => (
             <div key={roleOption.value + index} className={"text-center"}>
               <button
                 className={classNames(roleOption.select && "text-sub-2")}
@@ -200,7 +224,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>속성</div>
 
         <div className={"flex-1 grid grid-cols-6"}>
-          {heroListFilter.element.map((elementOption, index) => (
+          {filterOptionSelector.element.map((elementOption, index) => (
             <div key={elementOption.value + index} className={"text-center"}>
               <button
                 className={classNames(elementOption.select && "text-sub-2")}
@@ -217,7 +241,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>무기</div>
 
         <div className={"flex-1 grid grid-cols-4 gap-4"}>
-          {heroListFilter.weaponType.map((weaponTypeOption, index) => (
+          {filterOptionSelector.weaponType.map((weaponTypeOption, index) => (
             <div key={weaponTypeOption.value + index} className={"text-center"}>
               <button
                 className={classNames(weaponTypeOption.select && "text-sub-2")}
@@ -234,7 +258,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>무기 스킬 타입</div>
 
         <div className={"flex-1 grid grid-cols-4"}>
-          {heroListFilter.weaponSkillType.map(
+          {filterOptionSelector.weaponSkillType.map(
             (weaponSkillTypeOption, index) => (
               <div
                 key={weaponSkillTypeOption.value + index}
@@ -260,7 +284,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>파티 버프</div>
 
         <div className={"flex-1 grid grid-cols-4 gap-4"}>
-          {heroListFilter.partyBuff.map((partyBuffOption, index) => (
+          {filterOptionSelector.partyBuff.map((partyBuffOption, index) => (
             <div key={partyBuffOption.value + index} className={"text-center"}>
               <button
                 className={classNames(partyBuffOption.select && "text-sub-2")}
@@ -277,7 +301,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>연계기 시작</div>
 
         <div className={"flex-1 grid grid-cols-4"}>
-          {heroListFilter.chainSkillStartType.map(
+          {filterOptionSelector.chainSkillStartType.map(
             (chainSkillStartTypeOption, index) => (
               <div
                 key={chainSkillStartTypeOption.value + index}
@@ -303,7 +327,7 @@ const HeroSearchListFilter = ({
         <div className={"w-40"}>연계기 종료</div>
 
         <div className={"flex-1 grid grid-cols-4"}>
-          {heroListFilter.chainSkillEndType.map(
+          {filterOptionSelector.chainSkillEndType.map(
             (chainSkillEndTypeOption, index) => (
               <div
                 key={chainSkillEndTypeOption.value + index}
