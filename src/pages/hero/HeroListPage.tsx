@@ -10,9 +10,9 @@ import { useAppSelector } from "@store/store";
 import { Hero } from "@typings/Hero";
 
 const HeroListPage = () => {
-  const [partyConfig, setPartyConfig] = useState<string>(PARTY_TYPE.SINGLE);
   const [searchText, setSearchText] = useState<string>("");
 
+  const partyTypeSelector = useAppSelector((state) => state.hero.partyType);
   const singlePartySelector = useAppSelector((state) => state.hero.singleParty);
   const triplePartySelector = useAppSelector((state) => state.hero.tripleParty);
 
@@ -25,7 +25,7 @@ const HeroListPage = () => {
       let exist = false;
       let partyList: Hero[] = [];
 
-      if (partyConfig === PARTY_TYPE.SINGLE) {
+      if (partyTypeSelector === PARTY_TYPE.SINGLE) {
         partyList = [...singlePartySelector];
       } else {
         partyList = [
@@ -44,7 +44,7 @@ const HeroListPage = () => {
       return exist;
     },
     [
-      partyConfig,
+      partyTypeSelector,
       singlePartySelector,
       triplePartySelector.first,
       triplePartySelector.second,
@@ -56,12 +56,9 @@ const HeroListPage = () => {
     <MainTemplate>
       <div className={"flex flex-row flex-1"}>
         <div className={"flex flex-col flex-1 min-h-[1000px] max-h-[1300px]"}>
-          <HeroPartyConfig
-            partyConfig={partyConfig}
-            setPartyConfig={setPartyConfig}
-          />
+          <HeroPartyConfig />
 
-          {partyConfig === PARTY_TYPE.SINGLE ? (
+          {partyTypeSelector === PARTY_TYPE.SINGLE ? (
             <HeroPartySingle />
           ) : (
             <HeroPartyTriple />
@@ -72,7 +69,6 @@ const HeroListPage = () => {
           className={"flex-1 min-h-[1000px] overflow-y-scroll scrollbar-hide"}
         >
           <HeroSearchList
-            partyConfig={partyConfig}
             setSearchText={setSearchText}
             heroList={heroes || []}
             checkHeroExist={checkHeroExist}

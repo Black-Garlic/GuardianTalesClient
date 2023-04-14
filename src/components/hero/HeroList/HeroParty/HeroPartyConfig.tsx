@@ -1,25 +1,23 @@
 import classNames from "classnames";
 import { PARTY_TYPE } from "@constants/Constants";
+import { useAppDispatch, useAppSelector } from "@store/store";
+import { setPartyType } from "@services/hero/HeroSlice";
 
-interface HeroPartyConfigProps {
-  partyConfig: string;
-  setPartyConfig: any;
-}
+const HeroPartyConfig = () => {
+  const dispatch = useAppDispatch();
 
-const HeroPartyConfig = ({
-  partyConfig,
-  setPartyConfig,
-}: HeroPartyConfigProps) => {
+  const partyTypeSelector = useAppSelector((state) => state.hero.partyType);
+
   return (
     <div className={"flex flex-row m-4 sub-title-2"}>
       <button
         className={classNames(
           "flex-1 mr-1.5 py-4 rounded-xl",
-          partyConfig === PARTY_TYPE.SINGLE
+          partyTypeSelector === PARTY_TYPE.SINGLE
             ? "text-sub-1 bg-main"
             : "text-main bg-sub-5"
         )}
-        onClick={() => setPartyConfig(PARTY_TYPE.SINGLE)}
+        onClick={() => dispatch(setPartyType(PARTY_TYPE.SINGLE))}
       >
         파티 1개
       </button>
@@ -27,11 +25,11 @@ const HeroPartyConfig = ({
       <button
         className={classNames(
           "flex-1 ml-1.5 py-4 rounded-xl",
-          partyConfig === PARTY_TYPE.TRIPLE
+          partyTypeSelector === PARTY_TYPE.TRIPLE
             ? "text-sub-1 bg-main"
             : "text-main bg-sub-5"
         )}
-        onClick={() => setPartyConfig(PARTY_TYPE.TRIPLE)}
+        onClick={() => dispatch(setPartyType(PARTY_TYPE.TRIPLE))}
       >
         파티 3개
       </button>

@@ -4,6 +4,7 @@ import { Hero } from "@typings/Hero";
 import { useCallback, useEffect, useState } from "react";
 import { FilterOption } from "@typings/Option";
 import {
+  resetFilterOption,
   setFilterOption,
   setSingleParty,
   setTripleFirstParty,
@@ -13,14 +14,12 @@ import {
 import { useAppDispatch, useAppSelector } from "@store/store";
 
 interface HeroSearchListProps {
-  partyConfig: string;
   setSearchText: any;
   heroList: Hero[];
   checkHeroExist: any;
 }
 
 const HeroSearchList = ({
-  partyConfig,
   setSearchText,
   heroList,
   checkHeroExist,
@@ -278,6 +277,7 @@ const HeroSearchList = ({
               }
             }}
           />
+
           <button
             className={"w-20 h-14 ml-3 rounded-lg text-sub-1 bg-main"}
             onClick={() =>
@@ -288,11 +288,19 @@ const HeroSearchList = ({
           >
             검색
           </button>
+
           <button
             className={"w-20 h-14 ml-3 rounded-lg text-sub-1 bg-main"}
             onClick={() => setOpenFilter((prev) => !prev)}
           >
             필터
+          </button>
+
+          <button
+            className={"w-20 h-14 ml-3 rounded-lg text-sub-1 bg-main"}
+            onClick={() => dispatch(resetFilterOption())}
+          >
+            초기화
           </button>
         </div>
 
@@ -321,7 +329,6 @@ const HeroSearchList = ({
                   <HeroSearchListItem
                     key={index}
                     hero={hero}
-                    partyConfig={partyConfig}
                     addSinglePartyHero={addSinglePartyHero}
                     addTripleFirstPartyHero={addTripleFirstPartyHero}
                     addTripleSecondPartyHero={addTripleSecondPartyHero}

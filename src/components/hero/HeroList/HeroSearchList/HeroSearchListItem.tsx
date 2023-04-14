@@ -1,10 +1,10 @@
 import { Hero } from "@typings/Hero";
 import { Link } from "react-router-dom";
 import { PARTY_TYPE } from "@constants/Constants";
+import { useAppSelector } from "@store/store";
 
 interface HeroSearchListItemProps {
   hero: Hero;
-  partyConfig: string;
   addSinglePartyHero: any;
   addTripleFirstPartyHero: any;
   addTripleSecondPartyHero: any;
@@ -13,12 +13,13 @@ interface HeroSearchListItemProps {
 
 const HeroSearchListItem = ({
   hero,
-  partyConfig,
   addSinglePartyHero,
   addTripleFirstPartyHero,
   addTripleSecondPartyHero,
   addTripleThirdPartyHero,
 }: HeroSearchListItemProps) => {
+  const partyTypeSelector = useAppSelector((state) => state.hero.partyType);
+
   return (
     <div className={"flex flex-row my-2 p-2 pb-0 rounded-lg bg-main"}>
       <div className={"w-16 h-16 mr-2"}>
@@ -45,7 +46,7 @@ const HeroSearchListItem = ({
             ))}
           </div>
 
-          {partyConfig === PARTY_TYPE.SINGLE ? (
+          {partyTypeSelector === PARTY_TYPE.SINGLE ? (
             <button
               className={"w-28 text-center"}
               onClick={() => addSinglePartyHero(hero)}

@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Hero } from "@typings/Hero";
 import { FilterOption } from "@typings/Option";
-import { FILTER_OPTION } from "@constants/Constants";
+import { FILTER_OPTION, PARTY_TYPE } from "@constants/Constants";
 
 interface HeroState {
+  partyType: string;
   singleParty: Hero[];
   tripleParty: {
     first: Hero[];
@@ -15,6 +16,7 @@ interface HeroState {
 
 // Define the initial state using that type
 const initialState: HeroState = {
+  partyType: PARTY_TYPE.SINGLE,
   singleParty: [],
   tripleParty: {
     first: [],
@@ -28,6 +30,9 @@ export const heroSlice = createSlice({
   name: "hero",
   initialState,
   reducers: {
+    setPartyType: (state, action: PayloadAction<string>) => {
+      state.partyType = action.payload;
+    },
     setSingleParty: (state, action: PayloadAction<Hero[]>) => {
       state.singleParty = action.payload;
     },
@@ -65,6 +70,7 @@ export const heroSlice = createSlice({
 });
 
 export const {
+  setPartyType,
   setSingleParty,
   resetSingleParty,
   setTripleFirstParty,
