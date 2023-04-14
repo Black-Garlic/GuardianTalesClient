@@ -1,4 +1,5 @@
 import { Hero } from "@typings/Hero";
+import { Link } from "react-router-dom";
 
 interface HeroSearchListItemProps {
   hero: Hero;
@@ -33,7 +34,12 @@ const HeroSearchListItem = ({ hero }: HeroSearchListItemProps) => {
           <button className={"w-28 text-center"}>1번 파티</button>
           <button className={"w-28 text-center"}>2번 파티</button>
           <button className={"w-28 text-center"}>3번 파티</button>
-          <button className={"w-28 text-center"}>상세정보</button>
+          <Link
+            className={"w-28 text-center"}
+            to={`/detail/${hero.heroInfoId}`}
+          >
+            상세정보
+          </Link>
         </div>
       </div>
     </div>

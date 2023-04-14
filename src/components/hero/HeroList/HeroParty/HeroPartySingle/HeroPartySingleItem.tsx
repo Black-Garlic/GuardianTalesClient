@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface HeroPartySingleItemProps {
   hero: any;
 }
@@ -33,7 +35,12 @@ const HeroPartySingleItem = ({ hero }: HeroPartySingleItemProps) => {
           <div className={"flex-1 p-1 pt-2"}>{hero.chainEndType}</div>
         </div>
         <div className={"flex flex-row flex-1"}>
-          <button className={"flex-1 p-1 pt-2 bg-sub-3"}>상세</button>
+          <Link
+            className={"flex-1 p-1 pt-2 bg-sub-3"}
+            to={`/detail/${hero.heroInfoId}`}
+          >
+            상세
+          </Link>
           <button className={"flex-1 p-1 pt-2 bg-sub-2"}>제외</button>
         </div>
       </div>

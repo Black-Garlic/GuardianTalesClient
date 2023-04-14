@@ -4,6 +4,7 @@ import HeroPartySingleEmptyItem from "@components/Hero/HeroList/HeroParty/HeroPa
 const HeroPartySingle = () => {
   const heroParty = [
     {
+      heroInfoId: 50,
       name: "베스",
       englishName: "White Beast",
       element: "암",
@@ -12,6 +13,7 @@ const HeroPartySingle = () => {
       chainEndType: "부상",
     },
     {
+      heroInfoId: 87,
       name: "칸나",
       englishName: "Future Knight",
       element: "무",
@@ -20,6 +22,7 @@ const HeroPartySingle = () => {
       chainEndType: "부상",
     },
     {
+      heroInfoId: 25,
       name: "엘비라",
       englishName: "Future Princess",
       element: "화",
@@ -28,6 +31,7 @@ const HeroPartySingle = () => {
       chainEndType: "부상",
     },
     {
+      heroInfoId: 10,
       name: "아오바",
       englishName: "Oghma",
       element: "광",

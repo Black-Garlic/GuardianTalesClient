@@ -4,6 +4,7 @@ import HeroPartyTripleEmptyItem from "@components/Hero/HeroList/HeroParty/HeroPa
 const HeroPartyTripleRow = () => {
   const heroParty = [
     {
+      heroInfoId: 25,
       name: "베스",
       englishName: "Beth",
       element: "암",
@@ -12,6 +13,7 @@ const HeroPartyTripleRow = () => {
       chainEndType: "부상",
     },
     {
+      heroInfoId: 91,
       name: "칸나",
       englishName: "Kanna",
       element: "무",
@@ -20,6 +22,7 @@ const HeroPartyTripleRow = () => {
       chainEndType: "부상",
     },
     {
+      heroInfoId: 45,
       name: "엘비라",
       englishName: "Elvira",
       element: "화",
@@ -28,6 +31,7 @@ const HeroPartyTripleRow = () => {
       chainEndType: "부상",
     },
     {
+      heroInfoId: 68,
       name: "",
       englishName: "Carol",
       element: "광",
