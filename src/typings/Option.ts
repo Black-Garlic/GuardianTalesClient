@@ -1,4 +1,5 @@
 export interface FilterOption {
+  keyword: string;
   stage: Option[];
   role: Option[];
   element: Option[];

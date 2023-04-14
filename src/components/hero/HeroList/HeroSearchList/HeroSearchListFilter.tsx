@@ -11,15 +11,6 @@ const HeroSearchListFilter = ({
   heroListFilter,
   setHeroListFilter,
 }: HeroSearchListFilterProps) => {
-  const filter = [
-    { title: "무", selected: true },
-    { title: "광", selected: false },
-    { title: "암", selected: false },
-    { title: "화", selected: false },
-    { title: "수", selected: false },
-    { title: "지", selected: false },
-  ];
-
   const toggleStageFilter = useCallback(
     (selectedStageOption: Option) => {
       setHeroListFilter((prev) => ({

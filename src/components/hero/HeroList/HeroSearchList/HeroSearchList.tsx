@@ -2,14 +2,14 @@ import HeroSearchListFilter from "@components/Hero/HeroList/HeroSearchList/HeroS
 import HeroSearchListItem from "@components/Hero/HeroList/HeroSearchList/HeroSearchListItem";
 import { Hero } from "@typings/Hero";
 import { useCallback, useEffect, useState } from "react";
-import { FilterOption, Option } from "@typings/Option";
+import { FilterOption } from "@typings/Option";
 import {
   CHAIN_TYPE,
   ELEMENT,
   ROLE,
   STAGE,
   WEAPON_TYPE,
-} from "../../../../constants/Constants";
+} from "@constants/Constants";
 
 interface HeroSearchListProps {
   setSearchText: any;
@@ -17,6 +17,7 @@ interface HeroSearchListProps {
 }
 
 const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
+  const [keyword, setKeyword] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
   const [heroListFilter, setHeroListFilter] = useState(Filter);
 
@@ -34,11 +35,12 @@ const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
   );
 
   useEffect(() => {
-    console.log(heroListFilter);
+    let newSearchString =
+      heroListFilter.keyword === "" ? "" : "?keyword=" + heroListFilter.keyword;
 
     let filterUsed = false;
-    let newSearchString = "";
     let selectedFilterList: FilterOption = {
+      keyword: "",
       stage: [],
       role: [],
       element: [],
@@ -201,8 +203,20 @@ const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
           <input
             className={"flex-1 px-3 rounded-lg outline-0"}
             placeholder={"영웅 검색"}
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setHeroListFilter((prev) => ({ ...prev, keyword: keyword }));
+              }
+            }}
           />
-          <button className={"w-20 h-14 ml-3 rounded-lg text-sub-1 bg-main"}>
+          <button
+            className={"w-20 h-14 ml-3 rounded-lg text-sub-1 bg-main"}
+            onClick={() =>
+              setHeroListFilter((prev) => ({ ...prev, keyword: keyword }))
+            }
+          >
             검색
           </button>
           <button
@@ -250,6 +264,7 @@ const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
 export default HeroSearchList;
 
 const Filter: FilterOption = {
+  keyword: "",
   stage: [
     {
       label: STAGE.UNIQUE,
