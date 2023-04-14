@@ -15,9 +15,9 @@ const HeroPartySingleItem = ({
 }: HeroPartySingleItemProps) => {
   return (
     <Draggable
-      draggableId={hero.englishName}
+      draggableId={"Single-" + hero.englishName}
       index={index}
-      key={hero.englishName}
+      key={"Single-" + hero.englishName}
     >
       {(provided): JSX.Element => (
         <div

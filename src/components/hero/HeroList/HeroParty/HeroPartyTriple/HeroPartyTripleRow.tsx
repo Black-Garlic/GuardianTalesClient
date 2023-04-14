@@ -4,6 +4,11 @@ import { Hero } from "@typings/Hero";
 import { useCallback } from "react";
 import classNames from "classnames";
 import { useAppDispatch } from "@store/store";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import {
+  setTripleFirstParty,
+  setTripleSecondParty,
+} from "@services/hero/HeroSlice";
 
 interface HeroPartyTripleRowProps {
   heroPartyList: Hero[];
@@ -30,6 +35,28 @@ const HeroPartyTripleRow = ({
     return result;
   }, [heroPartyList.length]);
 
+  const onDragEnd = useCallback(
+    (result: any) => {
+      if (
+        result?.source?.index !== null &&
+        result?.destination?.index !== null
+      ) {
+        const partyList = [...heroPartyList];
+        const [removed] = partyList.splice(result.source.index, 1);
+        partyList.splice(result.destination.index, 0, removed);
+
+        if (partyIndex === 1) {
+          dispatch(setTripleFirstParty(partyList));
+        } else if (partyIndex === 2) {
+          dispatch(setTripleSecondParty(partyList));
+        } else if (partyIndex === 3) {
+          dispatch(setTripleSecondParty(partyList));
+        }
+      }
+    },
+    [dispatch, heroPartyList]
+  );
+
   return (
     <div className={"flex flex-col flex-1 m-4 my-2 p-4 rounded-lg bg-sub-5"}>
       <div className={"flex flex-row mx-0 mb-4 sub-title-2"}>
@@ -51,15 +78,27 @@ const HeroPartyTripleRow = ({
         </button>
       </div>
 
-      <div className={"flex flex-row flex-1 mb-4 p-4 rounded-lg bg-sub-3"}>
-        {heroPartyList.map((hero) => (
-          <HeroPartyTripleItem
-            hero={hero}
-            removeTriplePartyHero={removeTriplePartyHero}
-          />
-        ))}
-        {generateEmptyItem()}
-      </div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId={`triple-${partyIndex}`} direction="horizontal">
+          {(provided: any) => (
+            <div
+              className={"flex flex-row flex-1 mb-4 p-4 rounded-lg bg-sub-3"}
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {heroPartyList.map((hero, index) => (
+                <HeroPartyTripleItem
+                  hero={hero}
+                  index={index}
+                  removeTriplePartyHero={removeTriplePartyHero}
+                />
+              ))}
+              {provided.placeholder}
+              {generateEmptyItem()}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
 
       <div
         className={

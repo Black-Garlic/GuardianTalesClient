@@ -36,10 +36,17 @@ const HeroPartySingle = () => {
 
   const onDragEnd = useCallback(
     (result: any) => {
-      if (result?.source?.index && result?.destination?.index) {
+      console.log(result);
+      console.log(result?.source?.index);
+      console.log(result?.destination?.index);
+      if (
+        result?.source?.index !== null &&
+        result?.destination?.index !== null
+      ) {
         const singleParty = [...singlePartySelector];
         const [removed] = singleParty.splice(result.source.index, 1);
         singleParty.splice(result.destination.index, 0, removed);
+        console.log(singleParty);
 
         dispatch(setSingleParty(singleParty));
       }
