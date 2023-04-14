@@ -10,16 +10,35 @@ import {
   STAGE,
   WEAPON_TYPE,
 } from "@constants/Constants";
+import {
+  setSingleParty,
+  setTripleFirstParty,
+  setTripleSecondParty,
+  setTripleThirdParty,
+} from "@services/hero/HeroSlice";
+import { useAppDispatch, useAppSelector } from "@store/store";
 
 interface HeroSearchListProps {
+  partyConfig: string;
   setSearchText: any;
   heroList: Hero[];
+  checkHeroExist: any;
 }
 
-const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
+const HeroSearchList = ({
+  partyConfig,
+  setSearchText,
+  heroList,
+  checkHeroExist,
+}: HeroSearchListProps) => {
+  const dispatch = useAppDispatch();
+
   const [keyword, setKeyword] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
   const [heroListFilter, setHeroListFilter] = useState(Filter);
+
+  const singlePartySelector = useAppSelector((state) => state.hero.singleParty);
+  const triplePartySelector = useAppSelector((state) => state.hero.tripleParty);
 
   const appendFilterString = useCallback(
     (searchString: string, filterString: string) => {
@@ -32,6 +51,50 @@ const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
       return searchString;
     },
     []
+  );
+
+  const addSinglePartyHero = useCallback(
+    (hero: Hero) => {
+      if (singlePartySelector.length < 4) {
+        if (!checkHeroExist(hero)) {
+          dispatch(setSingleParty([...singlePartySelector, hero]));
+        }
+      }
+    },
+    [checkHeroExist, dispatch, singlePartySelector]
+  );
+
+  const addTripleFirstPartyHero = useCallback(
+    (hero: Hero) => {
+      if (triplePartySelector.first.length < 4) {
+        if (!checkHeroExist(hero)) {
+          dispatch(setTripleFirstParty([...triplePartySelector.first, hero]));
+        }
+      }
+    },
+    [checkHeroExist, dispatch, triplePartySelector.first]
+  );
+
+  const addTripleSecondPartyHero = useCallback(
+    (hero: Hero) => {
+      if (triplePartySelector.second.length < 4) {
+        if (!checkHeroExist(hero)) {
+          dispatch(setTripleSecondParty([...triplePartySelector.second, hero]));
+        }
+      }
+    },
+    [checkHeroExist, dispatch, triplePartySelector.second]
+  );
+
+  const addTripleThirdPartyHero = useCallback(
+    (hero: Hero) => {
+      if (triplePartySelector.third.length < 4) {
+        if (!checkHeroExist(hero)) {
+          dispatch(setTripleThirdParty([...triplePartySelector.third, hero]));
+        }
+      }
+    },
+    [checkHeroExist, dispatch, triplePartySelector.third]
   );
 
   useEffect(() => {
@@ -251,9 +314,20 @@ const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
           </div>
 
           <div className={"h-[900px] overflow-y-scroll scrollbar-hide"}>
-            {heroList.map((hero, index) => (
-              <HeroSearchListItem key={index} hero={hero} />
-            ))}
+            {heroList.map(
+              (hero, index) =>
+                !checkHeroExist(hero) && (
+                  <HeroSearchListItem
+                    key={index}
+                    hero={hero}
+                    partyConfig={partyConfig}
+                    addSinglePartyHero={addSinglePartyHero}
+                    addTripleFirstPartyHero={addTripleFirstPartyHero}
+                    addTripleSecondPartyHero={addTripleSecondPartyHero}
+                    addTripleThirdPartyHero={addTripleThirdPartyHero}
+                  />
+                )
+            )}
           </div>
         </div>
       </div>

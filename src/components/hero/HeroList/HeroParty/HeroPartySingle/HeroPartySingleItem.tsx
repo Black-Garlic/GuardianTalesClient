@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
+import { Hero } from "@typings/Hero";
 
 interface HeroPartySingleItemProps {
-  hero: any;
+  hero: Hero;
+  removeSinglePartyHero: any;
 }
 
-const HeroPartySingleItem = ({ hero }: HeroPartySingleItemProps) => {
+const HeroPartySingleItem = ({
+  hero,
+  removeSinglePartyHero,
+}: HeroPartySingleItemProps) => {
   return (
     <div
       className={
@@ -31,8 +36,8 @@ const HeroPartySingleItem = ({ hero }: HeroPartySingleItemProps) => {
           <div className={"flex-1 p-1 pt-2"}>{hero.role}</div>
         </div>
         <div className={"flex flex-row flex-1 mb-2"}>
-          <div className={"flex-1 p-1 pt-2"}>{hero.chainStartType}</div>
-          <div className={"flex-1 p-1 pt-2"}>{hero.chainEndType}</div>
+          <div className={"flex-1 p-1 pt-2"}>{hero.chainSkillStartType}</div>
+          <div className={"flex-1 p-1 pt-2"}>{hero.chainSkillEndType}</div>
         </div>
         <div className={"flex flex-row flex-1"}>
           <Link
@@ -41,7 +46,12 @@ const HeroPartySingleItem = ({ hero }: HeroPartySingleItemProps) => {
           >
             상세
           </Link>
-          <button className={"flex-1 p-1 pt-2 bg-sub-2"}>제외</button>
+          <button
+            className={"flex-1 p-1 pt-2 bg-sub-2"}
+            onClick={() => removeSinglePartyHero(hero)}
+          >
+            제외
+          </button>
         </div>
       </div>
     </div>

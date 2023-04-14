@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
+import { Hero } from "@typings/Hero";
 
 interface HeroPartyTripleItemProps {
-  hero: any;
+  hero: Hero;
+  removeTriplePartyHero: any;
 }
 
-const HeroPartyTripleItem = ({ hero }: HeroPartyTripleItemProps) => {
+const HeroPartyTripleItem = ({
+  hero,
+  removeTriplePartyHero,
+}: HeroPartyTripleItemProps) => {
   return (
     <div
       className={
@@ -24,8 +29,8 @@ const HeroPartyTripleItem = ({ hero }: HeroPartyTripleItemProps) => {
           <div className={"flex-1 p-1 pt-2"}>{hero.role}</div>
         </div>
         <div className={"flex flex-row flex-1 mb-2"}>
-          <div className={"flex-1 p-1 pt-2"}>{hero.chainStartType}</div>
-          <div className={"flex-1 p-1 pt-2"}>{hero.chainEndType}</div>
+          <div className={"flex-1 p-1 pt-2"}>{hero.chainSkillStartType}</div>
+          <div className={"flex-1 p-1 pt-2"}>{hero.chainSkillEndType}</div>
         </div>
         <div className={"flex flex-row flex-1"}>
           <Link
@@ -34,7 +39,12 @@ const HeroPartyTripleItem = ({ hero }: HeroPartyTripleItemProps) => {
           >
             상세
           </Link>
-          <button className={"flex-1 p-1 pt-2 bg-sub-2"}>제외</button>
+          <button
+            className={"flex-1 p-1 pt-2 bg-sub-2"}
+            onClick={() => removeTriplePartyHero(hero)}
+          >
+            제외
+          </button>
         </div>
       </div>
     </div>

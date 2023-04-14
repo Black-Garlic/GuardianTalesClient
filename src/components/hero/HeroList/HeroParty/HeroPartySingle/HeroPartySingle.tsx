@@ -1,67 +1,58 @@
 import HeroPartySingleItem from "@components/Hero/HeroList/HeroParty/HeroPartySingle/HeroPartySingleItem";
 import HeroPartySingleEmptyItem from "@components/Hero/HeroList/HeroParty/HeroPartySingle/HeroPartySingleEmptyItem";
+import { useAppDispatch, useAppSelector } from "@store/store";
+import { useCallback } from "react";
+import { Hero } from "@typings/Hero";
+import { setSingleParty } from "@services/hero/HeroSlice";
 
 const HeroPartySingle = () => {
-  const heroParty = [
-    {
-      heroInfoId: 50,
-      name: "베스",
-      englishName: "White Beast",
-      element: "암",
-      role: "전사",
-      chainStartType: "다운",
-      chainEndType: "부상",
+  const dispatch = useAppDispatch();
+
+  const singlePartySelector = useAppSelector((state) => state.hero.singleParty);
+
+  const generateEmptyItem = useCallback(() => {
+    const result = [];
+
+    for (let index = 0; index < 4 - singlePartySelector.length; index++) {
+      result.push(<HeroPartySingleEmptyItem key={"Empty-" + index} />);
+    }
+
+    return result;
+  }, [singlePartySelector.length]);
+
+  const removeSinglePartyHero = useCallback(
+    (hero: Hero) => {
+      dispatch(
+        setSingleParty(
+          singlePartySelector.filter(
+            (existHero) => existHero.englishName !== hero.englishName
+          )
+        )
+      );
     },
-    {
-      heroInfoId: 87,
-      name: "칸나",
-      englishName: "Future Knight",
-      element: "무",
-      role: "지원가",
-      chainStartType: "다운",
-      chainEndType: "부상",
-    },
-    {
-      heroInfoId: 25,
-      name: "엘비라",
-      englishName: "Future Princess",
-      element: "화",
-      role: "원거리 딜러",
-      chainStartType: "다운",
-      chainEndType: "부상",
-    },
-    {
-      heroInfoId: 10,
-      name: "아오바",
-      englishName: "Oghma",
-      element: "광",
-      role: "전사",
-      chainStartType: "다운",
-      chainEndType: "부상",
-    },
-  ];
+    [dispatch, singlePartySelector]
+  );
 
   return (
     <div className={"flex flex-col flex-1 m-4 p-4 rounded-lg bg-sub-5"}>
-      <div className={"flex flex-row flex-1 mb-4 p-4 rounded-lg bg-sub-3"}>
-        {heroParty.map((hero) => {
-          if (hero.name !== "") {
-            return <HeroPartySingleItem hero={hero} />;
-          } else {
-            return <HeroPartySingleEmptyItem />;
-          }
-        })}
+      <div className={"flex flex-row flex-1 mb-4 p-4 h-40 rounded-lg bg-sub-3"}>
+        {singlePartySelector.map((hero) => (
+          <HeroPartySingleItem
+            hero={hero}
+            removeSinglePartyHero={removeSinglePartyHero}
+          />
+        ))}
+        {generateEmptyItem()}
       </div>
 
       <div
         className={
-          "flex flex-col px-4 py-3 rounded-lg sub-title-2 text-sub-1 bg-sub-3"
+          "flex flex-col px-4 py-3 h-[152px] rounded-lg sub-title-2 text-sub-1 bg-sub-3"
         }
       >
-        <div className={"flex-1 my-1"}>근접 피해량 50%</div>
-        <div className={"flex-1 my-1"}>기술 피해량 90%</div>
-        <div className={"flex-1 my-1"}>암속성 공격력 50%</div>
-        <div className={"flex-1 my-1"}>치명타 확률 40%</div>
+        {singlePartySelector.map((hero) => (
+          <div className={"my-1"}>{hero.partyBuff}</div>
+        ))}
       </div>
     </div>
   );
