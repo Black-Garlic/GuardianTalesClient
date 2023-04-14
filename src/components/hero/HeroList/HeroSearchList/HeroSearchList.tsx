@@ -151,7 +151,7 @@ const HeroSearchList = ({ setSearchText, heroList }: HeroSearchListProps) => {
       if (selectedFilterList.weaponSkillType.length > 0) {
         let filterString =
           "weaponSkillType=" +
-          selectedFilterList.role
+          selectedFilterList.weaponSkillType
             .map((weaponSkillTypeOption) => weaponSkillTypeOption.value)
             .join(",");
 
