@@ -60,6 +60,7 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@craco/types": "^7.1.0",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "cross-env": "^7.0.3",
     "tailwindcss": "^3.3.1"
   }

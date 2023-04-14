@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@store/store";
 import { useCallback } from "react";
 import { Hero } from "@typings/Hero";
 import { setSingleParty } from "@services/hero/HeroSlice";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const HeroPartySingle = () => {
   const dispatch = useAppDispatch();
@@ -33,17 +34,44 @@ const HeroPartySingle = () => {
     [dispatch, singlePartySelector]
   );
 
+  const onDragEnd = useCallback(
+    (result: any) => {
+      if (result?.source?.index && result?.destination?.index) {
+        const singleParty = [...singlePartySelector];
+        const [removed] = singleParty.splice(result.source.index, 1);
+        singleParty.splice(result.destination.index, 0, removed);
+
+        dispatch(setSingleParty(singleParty));
+      }
+    },
+    [dispatch, singlePartySelector]
+  );
+
   return (
     <div className={"flex flex-col flex-1 m-4 p-4 rounded-lg bg-sub-5"}>
-      <div className={"flex flex-row flex-1 mb-4 p-4 h-40 rounded-lg bg-sub-3"}>
-        {singlePartySelector.map((hero) => (
-          <HeroPartySingleItem
-            hero={hero}
-            removeSinglePartyHero={removeSinglePartyHero}
-          />
-        ))}
-        {generateEmptyItem()}
-      </div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable" direction="horizontal">
+          {(provided: any) => (
+            <div
+              className={
+                "flex flex-row flex-1 mb-4 p-4 h-40 rounded-lg bg-sub-3"
+              }
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {singlePartySelector.map((hero, index) => (
+                <HeroPartySingleItem
+                  hero={hero}
+                  index={index}
+                  removeSinglePartyHero={removeSinglePartyHero}
+                />
+              ))}
+              {provided.placeholder}
+              {generateEmptyItem()}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
 
       <div
         className={
