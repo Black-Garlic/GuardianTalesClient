@@ -3,6 +3,9 @@ import { useAppDispatch, useAppSelector } from "@store/store";
 import { useCallback } from "react";
 import { Hero } from "@typings/Hero";
 import {
+  resetTripleFirstParty,
+  resetTripleSecondParty,
+  resetTripleThirdParty,
   setTripleFirstParty,
   setTripleSecondParty,
   setTripleThirdParty,
@@ -56,14 +59,17 @@ const HeroPartyTriple = () => {
     <div className={"flex flex-col mt-2"}>
       <HeroPartyTripleRow
         heroPartyList={triplePartySelector.first}
+        resetHeroPartyList={resetTripleFirstParty()}
         removeTriplePartyHero={removeTripleFirstPartyHero}
       />
       <HeroPartyTripleRow
         heroPartyList={triplePartySelector.second}
+        resetHeroPartyList={resetTripleSecondParty()}
         removeTriplePartyHero={removeTripleSecondPartyHero}
       />
       <HeroPartyTripleRow
         heroPartyList={triplePartySelector.third}
+        resetHeroPartyList={resetTripleThirdParty()}
         removeTriplePartyHero={removeTripleThirdPartyHero}
       />
     </div>

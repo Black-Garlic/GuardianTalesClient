@@ -2,16 +2,22 @@ import HeroPartyTripleItem from "@components/Hero/HeroList/HeroParty/HeroPartyTr
 import HeroPartyTripleEmptyItem from "@components/Hero/HeroList/HeroParty/HeroPartyTriple/HeroPartyTripleEmptyItem";
 import { Hero } from "@typings/Hero";
 import { useCallback } from "react";
+import classNames from "classnames";
+import { useAppDispatch } from "@store/store";
 
 interface HeroPartyTripleRowProps {
   heroPartyList: Hero[];
+  resetHeroPartyList: any;
   removeTriplePartyHero: any;
 }
 
 const HeroPartyTripleRow = ({
   heroPartyList,
+  resetHeroPartyList,
   removeTriplePartyHero,
 }: HeroPartyTripleRowProps) => {
+  const dispatch = useAppDispatch();
+
   const generateEmptyItem = useCallback(() => {
     const result = [];
 
@@ -24,6 +30,15 @@ const HeroPartyTripleRow = ({
 
   return (
     <div className={"flex flex-col flex-1 m-4 my-2 p-4 rounded-lg bg-sub-5"}>
+      <div className={"flex flex-row mx-0 mb-4 sub-title-2"}>
+        <button
+          className={classNames("flex-1 py-4 rounded-xl text-sub-1 bg-main")}
+          onClick={() => dispatch(resetHeroPartyList)}
+        >
+          조합 초기화
+        </button>
+      </div>
+
       <div className={"flex flex-row flex-1 mb-4 p-4 rounded-lg bg-sub-3"}>
         {heroPartyList.map((hero) => (
           <HeroPartyTripleItem

@@ -8,6 +8,7 @@ import { useGetHeroesListQuery } from "@services/hero/HeroApi";
 import { PARTY_TYPE } from "@constants/Constants";
 import { useAppSelector } from "@store/store";
 import { Hero } from "@typings/Hero";
+import HeroPartyReset from "@components/Hero/HeroList/HeroParty/HeroPartyReset";
 
 const HeroListPage = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -55,18 +56,26 @@ const HeroListPage = () => {
   return (
     <MainTemplate>
       <div className={"flex flex-row flex-1"}>
-        <div className={"flex flex-col flex-1 min-h-[1000px] max-h-[1300px]"}>
+        <div className={"flex flex-col flex-1 min-h-[1000px] max-h-[1550px]"}>
           <HeroPartyConfig />
 
           {partyTypeSelector === PARTY_TYPE.SINGLE ? (
-            <HeroPartySingle />
+            <>
+              <HeroPartyReset />
+              <HeroPartySingle />
+            </>
           ) : (
-            <HeroPartyTriple />
+            <>
+              <HeroPartyReset />
+              <HeroPartyTriple />
+            </>
           )}
         </div>
 
         <div
-          className={"flex-1 min-h-[1000px] overflow-y-scroll scrollbar-hide"}
+          className={
+            "flex-1 min-h-[1000px] max-h-[1550px] overflow-y-scroll scrollbar-hide"
+          }
         >
           <HeroSearchList
             setSearchText={setSearchText}

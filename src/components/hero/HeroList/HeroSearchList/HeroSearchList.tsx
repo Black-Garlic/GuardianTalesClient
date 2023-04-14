@@ -12,6 +12,7 @@ import {
   setTripleThirdParty,
 } from "@services/hero/HeroSlice";
 import { useAppDispatch, useAppSelector } from "@store/store";
+import classNames from "classnames";
 
 interface HeroSearchListProps {
   setSearchText: any;
@@ -322,7 +323,12 @@ const HeroSearchList = ({
             </div>
           </div>
 
-          <div className={"h-[900px] overflow-y-scroll scrollbar-hide"}>
+          <div
+            className={classNames(
+              "overflow-y-scroll scrollbar-hide",
+              openFilter ? "h-[660px]" : "h-[1252px]"
+            )}
+          >
             {heroList.map(
               (hero, index) =>
                 !checkHeroExist(hero) && (
