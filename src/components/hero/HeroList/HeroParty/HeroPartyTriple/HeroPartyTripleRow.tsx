@@ -7,12 +7,14 @@ import { useAppDispatch } from "@store/store";
 
 interface HeroPartyTripleRowProps {
   heroPartyList: Hero[];
+  partyIndex: number;
   resetHeroPartyList: any;
   removeTriplePartyHero: any;
 }
 
 const HeroPartyTripleRow = ({
   heroPartyList,
+  partyIndex,
   resetHeroPartyList,
   removeTriplePartyHero,
 }: HeroPartyTripleRowProps) => {
@@ -31,8 +33,18 @@ const HeroPartyTripleRow = ({
   return (
     <div className={"flex flex-col flex-1 m-4 my-2 p-4 rounded-lg bg-sub-5"}>
       <div className={"flex flex-row mx-0 mb-4 sub-title-2"}>
+        <div
+          className={classNames(
+            "flex-1 mr-2 py-4 rounded-xl text-sub-1 text-center bg-main"
+          )}
+        >
+          {partyIndex}번 파티
+        </div>
+
         <button
-          className={classNames("flex-1 py-4 rounded-xl text-sub-1 bg-main")}
+          className={classNames(
+            "flex-1 ml-2 py-4 rounded-xl text-sub-1 bg-main"
+          )}
           onClick={() => dispatch(resetHeroPartyList)}
         >
           조합 초기화

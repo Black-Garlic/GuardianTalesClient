@@ -59,16 +59,19 @@ const HeroPartyTriple = () => {
     <div className={"flex flex-col mt-2"}>
       <HeroPartyTripleRow
         heroPartyList={triplePartySelector.first}
+        partyIndex={1}
         resetHeroPartyList={resetTripleFirstParty()}
         removeTriplePartyHero={removeTripleFirstPartyHero}
       />
       <HeroPartyTripleRow
         heroPartyList={triplePartySelector.second}
+        partyIndex={2}
         resetHeroPartyList={resetTripleSecondParty()}
         removeTriplePartyHero={removeTripleSecondPartyHero}
       />
       <HeroPartyTripleRow
         heroPartyList={triplePartySelector.third}
+        partyIndex={3}
         resetHeroPartyList={resetTripleThirdParty()}
         removeTriplePartyHero={removeTripleThirdPartyHero}
       />
